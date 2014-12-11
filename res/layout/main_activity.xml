@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+     >
+     
+    <!--
+     
+  	<RelativeLayout 
+  	    android:layout_width="fill_parent"
+  	    android:layout_height="wrap_content"  	   
+  	    >
+    <TextView 
+        android:id="@+id/tvCityName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"        
+        android:gravity="center"
+        android:textSize="@dimen/large_font_size"
+        android:background="@color/black"
+        android:text="@string/not_available" />
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="Refresh"
+        android:background="@android:color/transparent"
+        android:src="@drawable/update_green_icon_50px" />
+    
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:orientation="horizontal"
+        android:layout_weight="6"
+        >
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            >
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+
+                android:src="@drawable/day01" />
+            
+            
+			<TextView
+			    android:id="@+id/tvWeatherDescription" 
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Sunny" 
+                />
+            
+            
+            <TextView 
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Pressure: 1000 hPa" 
+                />
+            <TextView 
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Wind: 5 m/s Norh" 
+                />
+	        
+    	</LinearLayout>
+
+    	<LinearLayout
+            android:layout_weight="1"
+			android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" 
+            >
+    	   	
+    	   	<TextView 
+    	   	    android:id="@+id/tvTemp"
+    	   	    android:layout_width="wrap_content"
+    	   	    android:layout_height="wrap_content"
+    	   	    android:gravity="center_horizontal"
+    	   	    android:layout_gravity="center_horizontal"
+    	   	    android:text="-1"
+    	   	    android:textSize="30sp"
+    	   	     />
+    	   	<TextView
+    	   	    android:id="@+id/tvTempMinMax" 
+    	   	    android:layout_width="wrap_content"
+    	   	    android:layout_height="wrap_content"
+    	   	    android:layout_gravity="center_horizontal"
+    	   	    android:gravity="center_horizontal"
+    	   	    android:text="-17  -  -15"
+    	   	    android:textSize="18sp"
+    	   	     />
+    	   	    	   	
+			<TextView 
+			    android:id="@+id/tvHumidity"
+    	   	    android:layout_width="wrap_content"
+    	   	    android:layout_height="wrap_content"
+    	   	    
+    	   	    android:layout_gravity="center_horizontal"
+    	   	    android:text="Humidity: 100%"
+    	   	    android:textSize="18sp"
+    	   	     />
+                
+    	</LinearLayout>
+    </LinearLayout>
+    
+    <ListView
+        android:id="@+id/listVewDaileForecast"
+		android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:layout_weight="3" 
+        >
+        
+    </ListView>
+    
+        <TextView 
+	        android:id="@+id/textViewUpdatedTime"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_horizontal"
+	        android:gravity="right"
+	        android:text="Last update: 14:13 21.01.2015" />
+  
+   -->
+
+</LinearLayout>

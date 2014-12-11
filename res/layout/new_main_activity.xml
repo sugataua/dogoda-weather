@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    
+    <RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:background="@color/blue_main">
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"
+            android:textStyle="bold"
+            android:textSize="@dimen/large_font_size"
+            android:background="@android:color/transparent"
+            android:text="@string/weather_title"
+            />
+        
+        <ImageView            
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:onClick="updateWeatherClick"
+            android:contentDescription="@string/refresh_weather_descr"
+            android:src="@drawable/ic_action_refresh"/>
+        
+    </RelativeLayout>
+    
+    <RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:background="@color/blue_light">
+        
+        <TextView
+            android:id="@+id/tvCityName"
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_centerInParent="true"
+        	android:textSize="@dimen/normal_font_size"
+        	android:text="@string/empty" 
+            />
+    <!--     
+        <ImageView 
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:contentDescription="@string/change_city_descr"
+            android:onClick="changeCityClick"
+            android:src="@drawable/action_search" />
+            
+             -->
+        
+    </RelativeLayout>
+    
+     <RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="20dp"
+        android:background="@color/grey_300">
+	    
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"            
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="@string/now"
+            />
+        
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"            
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:text="@string/actual"
+            />
+        
+    </RelativeLayout>
+    
+    <LinearLayout
+        android:baselineAligned="false"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white" >
+    
+	    
+	    <RelativeLayout
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_margin="5dp"
+	        android:layout_weight="0.5"	        
+	        android:background="@color/white">
+	        
+	        <ImageView
+	            android:id="@+id/ivWeatherCondition" 
+	            android:layout_width="100dp"
+	            android:layout_height="100dp"
+	            android:layout_centerHorizontal="true"
+	            android:src="@drawable/overcast"            
+	            />
+	        
+	        <TextView
+	            android:id="@+id/tvWeatherDescription"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:textSize="@dimen/normal_font_size"	            
+	            android:layout_margin="5dp"
+	            android:layout_below="@id/ivWeatherCondition"
+	            android:layout_centerHorizontal="true"
+	            android:text="@string/empty"
+	            />        
+	    </RelativeLayout>
+	    
+	    <RelativeLayout        
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="0.5"
+	        android:layout_margin="5dp"
+	        android:layout_gravity="center_vertical"
+	        android:background="@color/white">
+	        
+	        <TextView
+	            android:id="@+id/tvTemp"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:textSize="30sp"
+	            android:layout_margin="5dp"
+	            android:layout_centerHorizontal="true"
+	            android:text="@string/not_available"
+	             />
+	         
+	        <!-- 
+	         <TextView
+	             android:id="@+id/tvTempMinMax" 
+	             android:layout_width="wrap_content"
+	             android:layout_height="wrap_content"
+	             android:layout_below="@id/tvTemp"
+	             android:layout_margin="5dp"
+	             android:layout_centerHorizontal="true"
+	             android:text="-17  -  -15"             
+	             />
+	             
+	              -->
+			<TextView 
+			    android:id="@+id/tvHumidity"
+    	   	    android:layout_width="wrap_content"
+    	   	    android:layout_height="wrap_content"
+    	   	    android:layout_below="@id/tvTemp"
+    	   	    android:layout_margin="5dp" 
+    	   	    android:layout_centerHorizontal="true"   	   	    
+    	   	    android:text="@string/empty"
+    	   	    
+    	   	     />
+			
+			
+            <TextView
+                android:id="@+id/tvPressure"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_below="@id/tvHumidity"
+                android:layout_centerHorizontal="true"
+                android:text="@string/empty" 
+                />
+	                
+	    </RelativeLayout>
+
+    </LinearLayout>
+    
+    <RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="20dp"
+        android:background="@color/grey_300">
+	    
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"            
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="@string/today"
+            />
+        
+    </RelativeLayout>
+    
+
+        <RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+        
+        <ImageView
+            android:id="@+id/ivTodayWeatherCondition"
+            android:layout_width="50dp"
+        	android:layout_height="50dp"
+        	android:layout_alignParentLeft="true"
+        	android:layout_centerVertical="true"
+        	android:layout_marginLeft="10dp"
+            
+            />
+        
+        <TextView 
+            android:id="@+id/tvTodayTempForecast"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"            
+            android:layout_toRightOf="@id/ivTodayWeatherCondition"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="15dp"
+            
+            android:text="@string/not_available" 
+            />
+        
+        <TextView 
+            android:id="@+id/tvTodayPrecForecast"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toRightOf="@id/tvTodayTempForecast" 
+            android:text="@string/empty" 
+            />
+                
+        </RelativeLayout>
+    
+        <RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="20dp"
+        android:background="@color/grey_300">
+	    
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"            
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="@string/tomorrow"
+            />
+        
+    </RelativeLayout>
+        <RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+        
+        <ImageView
+            android:id="@+id/ivTonightWeatherCondition"
+            android:layout_width="50dp"
+        	android:layout_height="50dp"
+        	android:layout_marginLeft="10dp"
+            
+            />
+        
+        
+                <TextView 
+            android:id="@+id/tvTonightTempForecast"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"            
+            android:layout_toRightOf="@id/ivTonightWeatherCondition"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="15dp"
+            
+            android:text="@string/not_available" 
+            />
+        
+        <TextView 
+            android:id="@+id/tvTonightPrecForecast"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toRightOf="@id/tvTonightTempForecast"            
+            android:text="@string/empty" 
+            />
+                
+        </RelativeLayout>
+    
+
+    <RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue_light">
+    <TextView 
+        android:id="@+id/textViewUpdatedTime"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center_horizontal"         
+        android:gravity="right"
+        android:text="" />
+    
+    </RelativeLayout>
+
+</LinearLayout>

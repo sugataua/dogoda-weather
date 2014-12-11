@@ -1,0 +1,179 @@
+<resources>
+
+    <string name="actual">Актуальное состояние</string>
+    <string name="app_name">Погода</string>
+    <string name="change_city_descr">Изменить город</string>
+    <string name="connection_impossible">Нет связи с сервером погоды</string>
+    <string name="forecast">Прогноз</string>
+    <string name="humidity">Влажность</string>
+    <string name="id_meaning_200">Гроза и небольшой дождь</string>
+    <string name="id_meaning_201">Гроза и дождь</string>
+    <string name="id_meaning_202">Гроза и сильный дождь</string>
+    <string name="id_meaning_210">Небольшая гроза</string>
+    <string name="id_meaning_211">Гроза</string>
+    <string name="id_meaning_212">Сильная гроза</string>
+    <string name="id_meaning_221">Гроза</string>
+    <string name="id_meaning_230">Гроза</string>
+    <string name="id_meaning_231">Гроза</string>
+    <string name="id_meaning_232">Гроза</string>
+    <string name="id_meaning_300">Изморось</string>
+    <string name="id_meaning_301">Изморось</string>
+    <string name="id_meaning_302">Изморось</string>
+    <string name="id_meaning_310">Изморось</string>
+    <string name="id_meaning_311">Изморось</string>
+    <string name="id_meaning_312">Изморось</string>
+    <string name="id_meaning_313">Изморось</string>
+    <string name="id_meaning_314">Изморось</string>
+    <string name="id_meaning_321">Изморось</string>
+    <string name="id_meaning_500">Дождь</string>
+    <string name="id_meaning_501">Дождь</string>
+    <string name="id_meaning_502">Дождь</string>
+    <string name="id_meaning_503">Дождь</string>
+    <string name="id_meaning_504">Дождь</string>
+    <string name="id_meaning_511">Дождь</string>
+    <string name="id_meaning_520">Дождь</string>
+    <string name="id_meaning_521">Дождь</string>
+    <string name="id_meaning_522">Дождь</string>
+    <string name="id_meaning_531">Дождь</string>
+    <string name="id_meaning_600">Небольшой снегопад</string>
+    <string name="id_meaning_601">Снегопад</string>
+    <string name="id_meaning_602">Сильный снегопад</string>
+    <string name="id_meaning_611">Мокрый снег</string>
+    <string name="id_meaning_612">Обильный мокрый снег</string>
+    <string name="id_meaning_615">Снег и небольшой дождь</string>
+    <string name="id_meaning_616">Снег и дождь</string>
+    <string name="id_meaning_620">Снег</string>
+    <string name="id_meaning_621">Снег</string>
+    <string name="id_meaning_622">Снег</string>
+    <string name="id_meaning_701">Легкий туман</string>
+    <string name="id_meaning_711">Дым</string>
+    <string name="id_meaning_721">Дымка</string>
+    <string name="id_meaning_731">Песок, пылевые вихри</string>
+    <string name="id_meaning_741">Туман</string>
+    <string name="id_meaning_751">Песок</string>
+    <string name="id_meaning_761">Пыль</string>
+    <string name="id_meaning_762">Вулканический пепел</string>
+    <string name="id_meaning_771">Шквалы</string>
+    <string name="id_meaning_781">Торнадо</string>
+    <string name="id_meaning_800">Ясно</string>
+    <string name="id_meaning_801">Легкая облачность</string>
+    <string name="id_meaning_802">Облачно</string>
+    <string name="id_meaning_803">Облачно</string>
+    <string name="id_meaning_804">Пасмурно</string>
+    <string name="id_meaning_900">Торнадо</string>
+    <string name="id_meaning_901">Тропический шторм</string>
+    <string name="id_meaning_902">Ураган</string>
+    <string name="id_meaning_903">Холодно</string>
+    <string name="id_meaning_904">Жарко</string>
+    <string name="id_meaning_905">Ветренно</string>
+    <string name="id_meaning_906">Град</string>
+    <string name="id_meaning_951">Штиль</string>
+    <string name="id_meaning_952">Легкий ветер</string>
+    <string name="id_meaning_953">Слабый ветер</string>
+    <string name="id_meaning_954">Умеренный ветер</string>
+    <string name="id_meaning_955">Свежий ветер</string>
+    <string name="id_meaning_956">Сильный ветер</string>
+    <string name="id_meaning_957">Очень сильный ветер</string>
+    <string name="id_meaning_958">Буря</string>
+    <string name="id_meaning_959">Сильная буря</string>
+    <string name="id_meaning_960">Шторм</string>
+    <string name="id_meaning_961">Сильный шторм</string>
+    <string name="id_meaning_962">Ураган</string>
+    <string name="not_available">Н/Д</string>
+    <string name="now">Сейчас</string>
+    <string name="pressure">Давление</string>
+    <string name="refresh_weather_descr">Обновить прогноз</string>
+    <string name="today">Сегодня</string>
+    <string name="tomorrow">Завтра</string>
+    <string name="weather_title">Погода</string>
+    <string name="preferences">Настройки</string>
+    <string name="city">Местоположение</string>
+    <string name="setup_units">Настроить единицы измерения</string>
+    <string name="units">Единицы измерения</string>
+        <string name="temperature">Температура</string>
+    <string name="tap_change_u">Нажмите, что бы изменить единицы измерения</string>
+    
+    
+    
+    
+        <string-array name="city_code">
+			<item>689558</item>
+			<item>709930</item>
+			<item>565348</item>
+			<item>686967</item>
+			<item>687700</item>
+			<item>707471</item>
+			<item>703448</item>
+			<item>705812</item>
+			<item>702658</item>
+			<item>702569</item>
+			<item>702550</item>
+			<item>700569</item>
+			<item>698740</item>
+			<item>696643</item>
+			<item>695594</item>
+			<item>694423</item>
+			<item>693805</item>
+			<item>692194</item>
+			<item>691650</item>
+			<item>690548</item>
+			<item>706483</item>
+			<item>706448</item>
+			<item>706369</item>
+			<item>710791</item>
+			<item>710735</item>
+			<item>710719</item>
+	</string-array>
+	
+   <string-array name="city_names">
+				<item>Винница</item>
+		<item>Днепропетровск</item>
+		<item>Донецк</item>
+		<item>Житомир</item>
+		<item>Запорожье</item>
+		<item>Ивано-Франковск</item>
+		<item>Киев</item>
+		<item>Кировоград</item>
+		<item>Луганск</item>
+		<item>Луцк</item>
+		<item>Львов</item>
+		<item>Николаев</item>
+		<item>Одесса</item>
+		<item>Полтава</item>
+		<item>Ровно</item>
+		<item>Севастополь</item>
+		<item>Симферополь</item>
+		<item>Сумы</item>
+		<item>Тернополь</item>
+		<item>Ужгород</item>
+		<item>Харьков</item>
+		<item>Херсон</item>
+		<item>Хмельницкий</item>
+		<item>Черкасы</item>
+		<item>Чернигов</item>
+		<item>Черновцы</item>
+			
+	</string-array>
+	
+	<string-array name="unit_temperature">
+        <item>Цельсий</item>
+        <item>Фаренгейт</item>
+        <item>Кельвин</item>
+    </string-array>
+
+    
+    
+	<string-array name="unit_pressure">
+        <item>мм. рт. ст.</item>
+        <item>hPa</item>        
+    </string-array>
+    
+
+    
+    
+    
+    
+    
+    
+
+</resources>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen 
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    
+    
+    <ListPreference
+        android:entries="@array/city_names"
+        android:entryValues="@array/city_code"
+        android:key="city_id"
+        android:summary="Tap to change weather location"
+        android:title="@string/city"
+        android:defaultValue="703448" />
+    
+    <PreferenceCategory 
+        android:key="category_units"
+        android:summary="@string/setup_units"
+        android:title="@string/units"
+        >
+        
+        <ListPreference
+            android:entries="@array/unit_temperature"
+            android:entryValues="@array/unit_temperature_values"
+            android:key="units_temp"
+            android:summary="@string/tap_change_u"
+            android:title="@string/temperature"
+            android:defaultValue="Celsius" />
+        
+        <ListPreference
+            android:entries="@array/unit_pressure"
+            android:entryValues="@array/unit_pressure_values"
+            android:key="units_pressure"
+            android:summary="@string/tap_change_u"
+            android:title="@string/pressure"
+            android:defaultValue="mmHg" />
+        
+    </PreferenceCategory>
+    
+
+</PreferenceScreen>

@@ -1,0 +1,200 @@
+<resources>
+
+    <string name="app_name">Dogoda Weather</string>
+    <string name="not_available">N/A</string>
+    <string name="empty"></string>
+    <string name="change_city_descr">Change city of weather data</string>
+    <string name="weather_title">Weather</string>
+    <string name="refresh_weather_descr">Refresh weather</string>
+    <string name="now">Now</string>
+    <string name="today">Today</string>
+    <string name="actual">Actual</string>
+    <string name="forecast">Forecast</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="humidity">Humidity</string>
+    <string name="pressure">Pressure</string>
+    <string name="preferences">Preferences</string>
+    <string name="city">Location</string>
+    <string name="setup_units">Set up units</string>
+    <string name="units">Units</string>
+    <string name="temperature">Temperature</string>
+    <string name="tap_change_u">Tap to change units</string>
+    
+    
+    
+    
+    
+    
+    <string name="connection_impossible">Can not connect to server!</string>
+    
+    
+    <string-array name="city_code">
+		<item>710791</item>
+		<item>710735</item>
+		<item>710719</item>
+		<item>709930</item>
+		<item>565348</item>
+		<item>707471</item>
+		<item>706483</item>
+		<item>706448</item>
+		<item>706369</item>
+		<item>703448</item>
+		<item>705812</item>
+		<item>702658</item>
+		<item>702569</item>
+		<item>702550</item>
+		<item>700569</item>
+		<item>698740</item>
+		<item>696643</item>
+		<item>695594</item>
+		<item>694423</item>
+		<item>693805</item>
+		<item>692194</item>
+		<item>691650</item>
+		<item>690548</item>
+		<item>689558</item>
+		<item>687700</item>
+		<item>686967</item>
+	</string-array>
+	
+   <string-array name="city_names">
+		<item>Cherkasy</item>
+		<item>Chernihiv</item>
+		<item>Chernivtsi</item>
+		<item>Dnipropetrovsk</item>
+		<item>Donetsk</item>
+		<item>Ivano-Frankivsk</item>
+		<item>Kharkiv</item>
+		<item>Kherson</item>
+		<item>Khmelnytskyy</item>
+		<item>Kiev</item>
+		<item>Kirovohrad</item>
+		<item>Luhansk</item>
+		<item>Lutsk</item>
+		<item>Lviv</item>
+		<item>Mykolayiv</item>
+		<item>Odessa</item>
+		<item>Poltava</item>
+		<item>Rivne</item>
+		<item>Sevastopol</item>
+		<item>Simferopol</item>
+		<item>Sumy</item>
+		<item>Ternopil</item>
+		<item>Uzhhorod</item>
+		<item>Vinnytsya</item>
+		<item>Zaporizhzhya</item>
+		<item>Zhytomyr</item>     
+			
+	</string-array>
+	
+	<string-array name="unit_temperature">
+        <item>Celsius</item>
+        <item>Fahrenheit</item>
+        <item>Kelvin</item>
+    </string-array>
+    
+    <string-array name="unit_temperature_values">
+        <item>Celsius</item>
+        <item>Fahrenheit</item>
+        <item>Kelvin</item>
+    </string-array>
+    
+    
+	<string-array name="unit_pressure">
+        <item>mmHg</item>
+        <item>hPa</item>        
+    </string-array>
+    
+    <string-array name="unit_pressure_values">
+        <item>mmHg</item>
+        <item>hPa</item>        
+    </string-array>
+    
+<string name="id_meaning_200">thunderstorm with light rain</string>
+   <string name="id_meaning_201">thunderstorm with rain</string>
+   <string name="id_meaning_202">thunderstorm with heavy rain</string>
+   <string name="id_meaning_210">light thunderstorm</string>
+   <string name="id_meaning_211">thunderstorm</string>
+   <string name="id_meaning_212">heavy thunderstorm</string>
+   <string name="id_meaning_221">ragged thunderstorm</string>
+   <string name="id_meaning_230">thunderstorm with light drizzle</string>
+   <string name="id_meaning_231">thunderstorm with drizzle</string>
+   <string name="id_meaning_232">thunderstorm with heavy drizzle</string>
+   
+   <string name="id_meaning_300">light intensity drizzle</string>
+   <string name="id_meaning_301">drizzle</string>
+   <string name="id_meaning_302">heavy intensity drizzle</string>
+   <string name="id_meaning_310">light intensity drizzle rain</string>
+   <string name="id_meaning_311">drizzle rain</string>
+   <string name="id_meaning_312">heavy intensity drizzle rain</string>
+   <string name="id_meaning_313">shower rain and drizzle</string>
+   <string name="id_meaning_314">heavy shower rain and drizzle</string>
+   <string name="id_meaning_321">shower drizzle</string>
+   
+   
+   <string name="id_meaning_500">light rain</string>
+   <string name="id_meaning_501">moderate rain</string>
+   <string name="id_meaning_502">heavy intensity rain</string>
+   <string name="id_meaning_503">very heavy rain</string>
+   <string name="id_meaning_504">extreme rain</string>
+   <string name="id_meaning_511">freezing rain</string>
+   <string name="id_meaning_520">light intensity shower rain</string>
+   <string name="id_meaning_521">shower rain</string>
+   <string name="id_meaning_522">heavy intensity shower rain</string>
+   <string name="id_meaning_531">ragged shower rain</string>
+   
+   <string name="id_meaning_600">light snow</string>   
+   <string name="id_meaning_601">snow</string>
+   <string name="id_meaning_602">heavy snow</string>
+   <string name="id_meaning_611">sleet</string>
+   <string name="id_meaning_612">shower sleet</string>
+   <string name="id_meaning_615">light rain and snow</string>
+   <string name="id_meaning_616">rain and snow</string>
+   <string name="id_meaning_620">light shower snow</string>
+   <string name="id_meaning_621">shower snow</string>
+   <string name="id_meaning_622">heavy shower snow</string>
+   
+   <string name="id_meaning_701">mist</string>
+   <string name="id_meaning_711">smoke</string>
+   <string name="id_meaning_721">haze</string>
+   <string name="id_meaning_731">sand, dust whirls</string>
+   <string name="id_meaning_741">fog</string>
+   <string name="id_meaning_751">sand</string>
+   <string name="id_meaning_761">dust</string>
+   <string name="id_meaning_762">volcanic ash</string>
+   <string name="id_meaning_771">squalls</string>
+   <string name="id_meaning_781">tornado</string>
+   
+   
+   <string name="id_meaning_800">clear sky</string>
+   <string name="id_meaning_801">few clouds</string>
+   <string name="id_meaning_802">scattered clouds</string>
+   <string name="id_meaning_803">broken clouds</string>
+   <string name="id_meaning_804">overcast clouds</string>
+   
+   <string name="id_meaning_900">tornado</string>
+   <string name="id_meaning_901">tropical storm</string>
+   <string name="id_meaning_902">hurricane</string>
+   <string name="id_meaning_903">cold</string>
+   <string name="id_meaning_904">hot</string>
+   <string name="id_meaning_905">windy</string>
+   <string name="id_meaning_906">hail</string>
+   <string name="id_meaning_951">calm</string>
+   <string name="id_meaning_952">light breeze</string>
+   <string name="id_meaning_953">gentle breeze</string>
+   <string name="id_meaning_954">moderate breeze</string>
+   <string name="id_meaning_955">fresh breeze</string>
+   <string name="id_meaning_956">strong breeze</string>
+   <string name="id_meaning_957">high wind, near gale</string>
+   <string name="id_meaning_958">gale</string>
+   <string name="id_meaning_959">severe gale</string>
+   <string name="id_meaning_960">storm</string>
+   <string name="id_meaning_961">violent storm</string>
+   <string name="id_meaning_962">hurricane</string>
+   
+ 
+   
+   
+
+
+</resources>

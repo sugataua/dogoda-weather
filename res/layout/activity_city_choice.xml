@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    
+        
+    <RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:background="@color/blue_main">
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"
+            android:textStyle="bold"
+            android:textSize="@dimen/large_font_size"
+            android:background="@android:color/transparent"
+            android:text="City"
+            />
+        
+        <ImageView            
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:onClick="backClick"
+            android:contentDescription="Previous"
+            android:src="@drawable/navigation_previous"/>
+
+        
+    </RelativeLayout>
+    
+ 	<!-- Pretty hint text, and maxLines -->
+
+    <EditText
+        android:id="@+id/list_search_box"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="type to filter"
+        android:inputType="text"
+        android:maxLines="1" />
+    
+    <ListView android:id="@+id/ListViewCC"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1" 
+         />
+    
+    <Button
+		 android:id="@+id/btnChecked"
+		 android:layout_width="wrap_content"
+		 android:layout_height="wrap_content"
+		 android:layout_gravity="center_horizontal"
+		 android:text="Choose city">
+	</Button>
+    
+    
+
+</LinearLayout>
