@@ -18,6 +18,17 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:text="Dogoda weather"        
-        />"
+        />
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="20dp" />
+    
+    <TextView
+        android:id="@+id/tvPoweredBy"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Powered by openweathermap.org"
+        android:onClick="onPoweredByClick"/>
 
 </LinearLayout>

@@ -36,5 +36,12 @@
         
     </PreferenceCategory>
     
+    <Preference
+        android:title="About program">
+        <intent
+            android:action="ua.amber_projects.intent.action.show"/>
+        
+    </Preference>
+    
 
 </PreferenceScreen>

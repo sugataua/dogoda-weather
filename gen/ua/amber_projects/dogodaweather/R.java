@@ -57,29 +57,30 @@ public final class R {
         public static final int update_grey_icon=0x7f020013;
     }
     public static final class id {
-        public static final int ListViewCC=0x7f0a0003;
-        public static final int btnChecked=0x7f0a0004;
+        public static final int ListViewCC=0x7f0a0004;
+        public static final int btnChecked=0x7f0a0005;
         public static final int imageViewLogo=0x7f0a0000;
-        public static final int ivDailyWeather=0x7f0a0006;
-        public static final int ivTodayWeatherCondition=0x7f0a0010;
-        public static final int ivTonightWeatherCondition=0x7f0a0013;
-        public static final int ivWeatherCondition=0x7f0a000c;
-        public static final int list_search_box=0x7f0a0002;
-        public static final int lvMain=0x7f0a0005;
+        public static final int ivDailyWeather=0x7f0a0007;
+        public static final int ivTodayWeatherCondition=0x7f0a0011;
+        public static final int ivTonightWeatherCondition=0x7f0a0014;
+        public static final int ivWeatherCondition=0x7f0a000d;
+        public static final int list_search_box=0x7f0a0003;
+        public static final int lvMain=0x7f0a0006;
         public static final int textViewAppName=0x7f0a0001;
-        public static final int textViewUpdatedTime=0x7f0a0016;
-        public static final int tvCityName=0x7f0a000b;
-        public static final int tvDate=0x7f0a0007;
-        public static final int tvDayTemp=0x7f0a0009;
-        public static final int tvHumidity=0x7f0a000e;
-        public static final int tvNightTemp=0x7f0a000a;
-        public static final int tvPressure=0x7f0a000f;
-        public static final int tvTemp=0x7f0a000d;
-        public static final int tvTodayPrecForecast=0x7f0a0012;
-        public static final int tvTodayTempForecast=0x7f0a0011;
-        public static final int tvTonightPrecForecast=0x7f0a0015;
-        public static final int tvTonightTempForecast=0x7f0a0014;
-        public static final int tvWeatherDescription=0x7f0a0008;
+        public static final int textViewUpdatedTime=0x7f0a0017;
+        public static final int tvCityName=0x7f0a000c;
+        public static final int tvDate=0x7f0a0008;
+        public static final int tvDayTemp=0x7f0a000a;
+        public static final int tvHumidity=0x7f0a000f;
+        public static final int tvNightTemp=0x7f0a000b;
+        public static final int tvPoweredBy=0x7f0a0002;
+        public static final int tvPressure=0x7f0a0010;
+        public static final int tvTemp=0x7f0a000e;
+        public static final int tvTodayPrecForecast=0x7f0a0013;
+        public static final int tvTodayTempForecast=0x7f0a0012;
+        public static final int tvTonightPrecForecast=0x7f0a0016;
+        public static final int tvTonightTempForecast=0x7f0a0015;
+        public static final int tvWeatherDescription=0x7f0a0009;
     }
     public static final class layout {
         public static final int about_activity=0x7f030000;

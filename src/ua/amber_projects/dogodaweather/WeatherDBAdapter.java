@@ -285,6 +285,54 @@ public class WeatherDBAdapter {
 	}
 	
 	
+	public long insertWeatherConditions( WeatherConditions weatherConditions, long cityRowID ) {
+		//long cityRowID;
+		long[] codesRowID;
+		long currentWeatherRowID;
+
+		codesRowID = insertWeatherCodesArray( weatherConditions.getWeatherConditions() );
+		
+		ContentValues cv = new ContentValues();
+		
+		cv.put(COLUMN_CITY_ID, cityRowID);
+		
+		cv.put(COLUMN_TEMP, weatherConditions.getTemp(Degree.Kelvin));
+		cv.put(COLUMN_TEMP_MIN, weatherConditions.getTempMin(Degree.Kelvin));
+		cv.put(COLUMN_TEMP_MAX, weatherConditions.getTempMax(Degree.Kelvin));
+		
+		cv.put(COLUMN_HUMIDITY, weatherConditions.getHumidity());
+		cv.put(COLUMN_CLOUDS, weatherConditions.getClouds());
+		
+		cv.put(COLUMN_PRESSURE, weatherConditions.getPressure());
+		cv.put(COLUMN_PRESSURE_SEA_LEVEL, weatherConditions.getPressureSeaLevel());
+		cv.put(COLUMN_PRESSURE_GRND_LEVEL, weatherConditions.getPressureGrndLevel());
+
+		cv.put(COLUMN_WIND_SPEED, weatherConditions.getWindSpeed());
+		cv.put(COLUMN_WIND_DEGREE, weatherConditions.getWindDegree());
+		cv.put(COLUMN_WIND_GUST, weatherConditions.getWindGust());
+		
+		cv.put(COLUMN_PRECIPITATION, weatherConditions.getPrecipitation());
+		cv.put(COLUMN_PRECIPITATION_VOLUME, weatherConditions.getPrecipitationVolume());		
+		
+		//cv.put(COLUMN_SUNRISE, -1);
+		//cv.put(COLUMN_SUNSET, -1);
+		
+		cv.put(COLUMN_DT, weatherConditions.getDT());
+		
+		
+		currentWeatherRowID = db.insert(TABLE_WEATHER_CONDITIONS, null, cv);
+		
+		for (int i = 0; i < codesRowID.length; i++) {
+			insertWeatherConditionsCode(currentWeatherRowID,codesRowID[i]);			
+		}
+		
+		Log.d(LOG_TAG, "Hourly Weather Forecast inserted, id=" + currentWeatherRowID);
+		
+		
+		return currentWeatherRowID;
+	}
+	
+	
 	
 	public long insertOrUpdateCurrentWeather( CurrentWeatherConditions _currentWeather) {
 		long cityRowID;
@@ -358,6 +406,78 @@ public class WeatherDBAdapter {
 	}
 	
 	
+	public long insertOrUpdateWeatherConditions( WeatherConditions weatherConditions, long cityRowID) {
+		
+		long[] codesRowID;
+		long currentWeatherRowID = -1;
+		String selection = COLUMN_CITY_ID + "=" + cityRowID + " and " +
+				COLUMN_DT + "=" + weatherConditions.getDT();
+		String[] columns = {KEY_ID};
+		
+		Cursor c = db.query(TABLE_WEATHER_CONDITIONS, columns, selection, null, null, null, null);	
+		
+		if (c.moveToFirst()) {
+			if (c.getCount() != 1)
+			{
+				Log.e(LOG_TAG, "Duplicate time of hourly weather conditions forecast");
+			} else {
+				ContentValues cv = new ContentValues();
+				
+				int idColIndex = c.getColumnIndex(KEY_ID);
+				
+				long cwID = c.getLong(idColIndex);
+				
+				cv.put(COLUMN_TEMP, weatherConditions.getTemp(Degree.Kelvin));
+				cv.put(COLUMN_TEMP_MIN, weatherConditions.getTempMin(Degree.Kelvin));
+				cv.put(COLUMN_TEMP_MAX, weatherConditions.getTempMax(Degree.Kelvin));
+				
+				cv.put(COLUMN_HUMIDITY, weatherConditions.getHumidity());
+				cv.put(COLUMN_CLOUDS, weatherConditions.getClouds());
+				
+				cv.put(COLUMN_PRESSURE, weatherConditions.getPressure());
+				cv.put(COLUMN_PRESSURE_SEA_LEVEL, weatherConditions.getPressureSeaLevel());
+				cv.put(COLUMN_PRESSURE_GRND_LEVEL, weatherConditions.getPressureGrndLevel());
+
+				cv.put(COLUMN_WIND_SPEED, weatherConditions.getWindSpeed());
+				cv.put(COLUMN_WIND_DEGREE, weatherConditions.getWindDegree());
+				cv.put(COLUMN_WIND_GUST, weatherConditions.getWindGust());
+				
+				cv.put(COLUMN_PRECIPITATION, weatherConditions.getPrecipitation());
+				cv.put(COLUMN_PRECIPITATION_VOLUME, weatherConditions.getPrecipitationVolume());		
+				
+				//cv.put(COLUMN_SUNRISE, -1);
+				//cv.put(COLUMN_SUNSET, -1);
+				
+				deleteWeatherConditionsCode(cwID);
+				
+				codesRowID = insertWeatherCodesArray( weatherConditions.getWeatherConditions() );
+				
+				for (int i = 0; i < codesRowID.length; i++) {
+					insertWeatherConditionsCode(cwID,codesRowID[i]);			
+				}
+				
+				db.update(
+						TABLE_WEATHER_CONDITIONS,
+						cv,
+						KEY_ID + " = ?", 
+						new String[] { String.valueOf(cwID) } );
+				
+				currentWeatherRowID = cwID;
+				
+				Log.d(LOG_TAG, "Updated hourly weather conditions: " + cwID);				
+			}
+		} else {
+			currentWeatherRowID = insertWeatherConditions(weatherConditions, cityRowID);
+			
+		}
+		
+		c.close();
+		return currentWeatherRowID;
+		
+		
+	}
+	
+	
 	public void deleteOldWeatherConditions(long _beforeDTstamp) {
 		String selection = COLUMN_DT + " < " + _beforeDTstamp;
 		String[] columns = {KEY_ID};
@@ -377,6 +497,17 @@ public class WeatherDBAdapter {
 		}
 				
 	}
+	
+	
+	public void insertOrUpdateHourlyForecast(HourlyForecast hourlyForecast) {
+		City city = hourlyForecast.getCity();
+		WeatherConditions[] wConditions = hourlyForecast.getHourlyWeather();
+		
+		for (int i = 0 ; i < wConditions.length; i++) {
+			insertOrUpdateWeatherConditions(wConditions[i], city.getCityId());
+		}		
+	}
+	
 	
 	public int deleteWeatherConditions(long _id){
 		return db.delete(TABLE_WEATHER_CONDITIONS,
@@ -551,8 +682,7 @@ public class WeatherDBAdapter {
 //					wCondRowId = c.getLong(idColIndex);					
 //				}
 //				
-//			}
-			
+//			}			
 			do {
 				wCondRowId = c.getLong(idColIndex);
 				fwc[i] = getDailyWeatherConditions(wCondRowId);								

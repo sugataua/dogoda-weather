@@ -11,6 +11,10 @@ import org.json.JSONObject;
 import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -34,11 +38,13 @@ public class UpdateWeatherService extends Service {
 	
 	public static boolean isRunning = false;
 	
+	private LocationManager locationManager;
 	
-	//private boolean isActivatedFlag = false;
+		
 	
 	Timer timer;
 	UpdateWeather uwTask;
+	UpdateLocation ulTask;
 	long interval = 1000 * 60 * 60 * 3;	
 	
 	SharedPreferences sp;
@@ -49,6 +55,7 @@ public class UpdateWeatherService extends Service {
 		Log.d(LOG_TAG, "OnCreate");
 		isRunning = true;
 		
+		locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);		
 		
 		sp = PreferenceManager.getDefaultSharedPreferences(this);
 		timer = new Timer();
@@ -62,8 +69,10 @@ public class UpdateWeatherService extends Service {
 		
 		if (uwTask != null) uwTask.cancel();
 		
-		uwTask = new UpdateWeather(city_ID);		
+		uwTask = new UpdateWeather(city_ID);
+		ulTask = new UpdateLocation();
 		timer.schedule(uwTask, 1000, interval);
+		timer.schedule(ulTask, 1000, interval/2);
 		
 				
 		return super.onStartCommand(intent, flags, startId);
@@ -72,6 +81,7 @@ public class UpdateWeatherService extends Service {
 	public void onDestroy() {
 		super.onDestroy();
 		isRunning = false;
+		
 		Log.d(LOG_TAG, "onDestroy");
 	}
 
@@ -79,6 +89,47 @@ public class UpdateWeatherService extends Service {
 	public IBinder onBind(Intent intent) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	class UpdateLocation extends TimerTask {
+		
+		
+		public void run() {
+			
+			locationManager.requestLocationUpdates(
+			        LocationManager.GPS_PROVIDER, 1000 * 10, 10,
+			        locationListener);
+			
+		}
+		
+		
+		private LocationListener locationListener = new LocationListener() {
+
+		    @Override
+		    public void onLocationChanged(Location location) {
+		      Log.d("LL","onLocationChanged");
+		      
+		      //locationManager.removeUpdates(locationListener);
+		      
+		      
+		      
+		    }
+
+		    @Override
+		    public void onProviderDisabled(String provider) {
+		    	Log.d("LL","onProviderDisabled");
+		    }
+
+		    @Override
+		    public void onProviderEnabled(String provider) {
+		    	Log.d("LL","onProviderEnabled");
+		    }
+
+		    @Override
+		    public void onStatusChanged(String provider, int status, Bundle extras) {
+		    	Log.d("LL","onStatusChanged");		    	
+		    }
+		  };
 	}
 	
 		
@@ -100,6 +151,7 @@ public class UpdateWeatherService extends Service {
 			
 			CurrentWeatherConditions currentWeather = getCurrentWeather();
 			DailyForecast dailyWeather = getDailyForecast();
+			HourlyForecast hourlyForecast = getHourlyForecast();
 						
 			Log.d(LOG_TAG, "Run timer task");
 
@@ -113,6 +165,11 @@ public class UpdateWeatherService extends Service {
 	        	wDBAdapter.insertOrUpdateCurrentWeather(currentWeather);
 	        }
 	        
+	        if (hourlyForecast != null) {
+	        	
+	        	wDBAdapter.insertOrUpdateHourlyForecast(hourlyForecast);
+	        }
+	        
 	        
 	        if (dailyWeather != null) {
 	        	
@@ -122,7 +179,7 @@ public class UpdateWeatherService extends Service {
 	    		    	
 	    	wDBAdapter.close();
 	    	
-	    	boolean updatedFlag = (currentWeather != null && dailyWeather != null);
+	    	boolean updatedFlag = (currentWeather != null && dailyWeather != null && hourlyForecast != null);
 	    	
 	    	
 	    	if (updatedFlag) {
@@ -176,6 +233,52 @@ public class UpdateWeatherService extends Service {
 	        
 	        return currentWeather;
 	        	
+	    }
+	    
+	    
+	    
+	    private HourlyForecast getHourlyForecast() {
+	    	
+	    	HourlyForecast hourlyForecast = null;
+	    	   
+			// Creating service handler class instance
+	        ServiceHandler sh = new ServiceHandler();
+	        
+	        // Creating list of parameters 
+	        List<NameValuePair> params = new ArrayList<NameValuePair>();
+	        params.add(new BasicNameValuePair(TAG_ID, cityID));
+	        params.add(new BasicNameValuePair("APPID", APIKEY));
+	        
+	        // Making API call and getting request
+	        String jsonStr = sh.makeServiceCall(URL_HOURLY_FORECAST, ServiceHandler.GET, params);
+	        
+	        if (jsonStr != null) {
+	        	try {
+	        		JSONObject jsonObj = new JSONObject(jsonStr);
+	        		
+	        		int answerCode = jsonObj.getInt(TAG_COD);
+	        		
+	        		if (answerCode == 200) {
+	        			
+	        			hourlyForecast = new HourlyForecast(jsonObj);
+	        			
+	        		} else {
+	        			Log.e("Answer", "Code is not 200 OK!"); 
+	        			//TODO catch 404 and other "bad" codes
+	        		}
+	        		
+	        	} catch (JSONException e) {
+	                e.printStackTrace();
+	                Log.e("JSON", "Unhandled json exception!");
+	        	}
+	        	
+	        } else {
+	        	Log.e("ServiceHandler", "Couldn't get any data from the url");
+	        }
+	        
+	        return hourlyForecast;	        	
+	    
+	    	
 	    }
 		
 	    

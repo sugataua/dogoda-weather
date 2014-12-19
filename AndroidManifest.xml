@@ -22,6 +22,10 @@
         
         
         <activity android:name="AboutActivity">
+             <intent-filter>
+                <action android:name="ua.amber_projects.intent.action.show" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         
         <activity android:name="CityChoise">
