@@ -16,11 +16,16 @@ public class MainTabActivity extends TabActivity {
 		TabHost.TabSpec tabSpec;
 		
 		tabSpec = tabHost.newTabSpec("tag1");
-		tabSpec.setIndicator("Now");
-		tabSpec.setContent(new Intent(this, MainActivity.class));
+		tabSpec.setIndicator(getResources().getString(R.string.now));	
+		tabSpec.setContent(new Intent(this, CurrentWeatherActivity.class));
 		tabHost.addTab(tabSpec);
 		
 		tabSpec = tabHost.newTabSpec("tag2");
+		tabSpec.setIndicator("Hourly forecast");
+		tabSpec.setContent(new Intent(this, HourlyForecastActivity.class));
+		tabHost.addTab(tabSpec);
+		
+		tabSpec = tabHost.newTabSpec("tag3");
 		tabSpec.setIndicator("Daily forecast");
 		tabSpec.setContent(new Intent(this, DailyForecastActivity.class));
 		tabHost.addTab(tabSpec);

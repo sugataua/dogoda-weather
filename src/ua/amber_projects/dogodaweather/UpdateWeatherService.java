@@ -1,6 +1,7 @@
 package ua.amber_projects.dogodaweather;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
@@ -11,6 +12,7 @@ import org.json.JSONObject;
 import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -48,6 +50,7 @@ public class UpdateWeatherService extends Service {
 	long interval = 1000 * 60 * 60 * 3;	
 	
 	SharedPreferences sp;
+	//PrefEditor  
 
 	
 	public void onCreate() {
@@ -183,7 +186,17 @@ public class UpdateWeatherService extends Service {
 	    	
 	    	
 	    	if (updatedFlag) {
-		    	Intent intent = new Intent(MainActivity.BROADCAST_ACTION);
+	    		
+	    		Editor ed = sp.edit();	    	
+	    		
+	    		Date now = new Date();
+	    		
+	    		
+	    		ed.putLong("lastUpdateDT", now.getTime());
+	    		
+	    		ed.commit();
+	    		
+		    	Intent intent = new Intent(CurrentWeatherActivity.BROADCAST_ACTION);
 		    	
 		    	sendBroadcast(intent);	    		
 	    	}

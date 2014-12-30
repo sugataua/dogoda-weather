@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    
+    
+     <RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="20dp"
+        android:background="@color/grey_300">
+	    
+
+        
+        <TextView
+            android:id="@+id/tvDataStatus"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"            
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:text="@string/actual"
+            />
+        
+    </RelativeLayout>
+    
+    <LinearLayout
+        android:baselineAligned="false"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white" >
+    
+	    
+	    <RelativeLayout
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_margin="5dp"
+	        android:layout_weight="0.5"	        
+	        android:background="@color/white">
+	        
+	        <ImageView
+	            android:id="@+id/ivWeatherCondition" 
+	            android:layout_width="100dp"
+	            android:layout_height="100dp"
+	            android:layout_centerHorizontal="true"
+	            android:src="@drawable/overcast"            
+	            />
+	        
+	        <TextView
+	            android:id="@+id/tvWeatherDescription"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:textSize="@dimen/normal_font_size"	            
+	            android:layout_margin="5dp"
+	            android:layout_below="@id/ivWeatherCondition"
+	            android:layout_centerHorizontal="true"
+	            android:text="@string/empty"
+	            />        
+	    </RelativeLayout>
+	    
+	    <RelativeLayout        
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="0.5"
+	        android:layout_margin="5dp"
+	        android:layout_gravity="center_vertical"
+	        android:background="@color/white">
+	        
+	        <TextView
+	            android:id="@+id/tvTemp"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:textSize="30sp"
+	            android:layout_margin="5dp"
+	            android:layout_centerHorizontal="true"
+	            android:text="@string/not_available"
+	             />
+	         
+
+			<TextView 
+			    android:id="@+id/tvHumidity"
+    	   	    android:layout_width="wrap_content"
+    	   	    android:layout_height="wrap_content"
+    	   	    android:layout_below="@id/tvTemp"
+    	   	    android:layout_margin="5dp" 
+    	   	    android:layout_centerHorizontal="true"   	   	    
+    	   	    android:text="@string/empty"
+    	   	    
+    	   	     />
+			
+			
+            <TextView
+                android:id="@+id/tvPressure"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_below="@id/tvHumidity"
+                android:layout_centerHorizontal="true"
+                android:text="@string/empty" 
+                />
+	                
+	    </RelativeLayout>
+	    
+
+
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="vertical">
+	    
+        
+            <TextView
+                android:id="@+id/tvClouds"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_margin="1dp"
+                android:text="@string/empty" 
+                />        
+	    
+            <TextView
+                android:id="@+id/tvWind"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_margin="1dp"
+                android:text="Wind: 4 m/s, north-east." 
+                />
+            
+            <TextView
+                android:id="@+id/tvPrec"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_margin="1dp"
+                android:text="Precipitation: snow, 10 mm." 
+                /> 
+	            
+    </LinearLayout>
+    
+
+
+    <RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue_light">
+    <TextView 
+        android:id="@+id/tvUpdatedTime"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"        
+        android:layout_gravity="center_horizontal"         
+        android:gravity="center"
+        android:text="Last updated: 29.12.2014 00:12" />
+    
+    </RelativeLayout>
+
+</LinearLayout>

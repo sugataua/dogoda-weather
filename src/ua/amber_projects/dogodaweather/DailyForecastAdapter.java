@@ -44,7 +44,7 @@ public class DailyForecastAdapter extends BaseAdapter {
 
 	@Override
 	public long getItemId(int position) {
-		// TODO Auto-generated method stub
+		
 		return position;
 	}
 
@@ -64,13 +64,13 @@ public class DailyForecastAdapter extends BaseAdapter {
 	    calendarDate.setTimeInMillis(dw.getDT());
 	    
 	    
-	    SimpleDateFormat ft_time =
-	    		new SimpleDateFormat ("EEEE");
+	    SimpleDateFormat ft_day =
+	    		new SimpleDateFormat ("EEEE, dd.MM, HH:mm:ss");
 		
 		
 		   
-		   ft_time.setTimeZone(TimeZone.getDefault());
-	       String day_of_week = ft_time.format(calendarDate.getTime());
+		   ft_day.setTimeZone(TimeZone.getDefault());
+	       String day_of_week = ft_day.format(calendarDate.getTime());
 	    
 	    
 	    ((TextView) view.findViewById(R.id.tvDayTemp)).setText(dw.getTempDay(Degree.Celsius) + "°");
@@ -80,7 +80,7 @@ public class DailyForecastAdapter extends BaseAdapter {
 	    
 	    WeatherCode[] weatherCodes = dw.getWeatherConditions().getWeatherCodes();
 	    
-	    int imageResourceId = MainActivity.getIconID(weatherCodes[0]);
+	    int imageResourceId = CurrentWeatherActivity.getIconID(weatherCodes[0]);
 	    ((ImageView) view.findViewById(R.id.ivDailyWeather)).setImageResource(imageResourceId);
 	    
 	    String packageName = ctx.getPackageName();

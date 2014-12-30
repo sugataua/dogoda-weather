@@ -3,6 +3,7 @@ package ua.amber_projects.dogodaweather;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.SimpleFormatter;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,78 +13,76 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class DailyForecastActivity extends Activity {
+public class HourlyForecastActivity extends Activity {
 	
-	DailyForecastAdapter dailyAdapter;
+	HourlyForecastAdapter hourlyAdapter;
 	SharedPreferences sp;
 	WeatherDBAdapter tempWDBAdapter;
 	ListView lvMain;
 	TextView tvCityCountry;
 	TextView tvLastUpdate;
-	
 	final SimpleDateFormat ft_date_time = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+//	View header;
+//	View footer;
 	
 	@Override
-	public void onCreate(Bundle savedInstanceState){
+	public void onCreate(Bundle savedInstanceState) {		
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.daily_weather_activity);
 		
 		sp = PreferenceManager.getDefaultSharedPreferences(this);
 		
-		tempWDBAdapter = new WeatherDBAdapter(this);
-		
+		tempWDBAdapter = new WeatherDBAdapter(this);		
 		
 		lvMain = (ListView) findViewById(R.id.lvMain);
 		tvCityCountry = (TextView) this.findViewById(R.id.tvHeaderText);
 		tvLastUpdate = (TextView) this.findViewById(R.id.tvFooterText);
 		
-		
-		
-		
-		
-		
-		
 	}
 	
+	
+
 	@Override
 	protected void onResume() {
 		
+		String city_ID = sp.getString("city_id", GetForecastTask.KIEV_ID);
 		long lastUpdate = sp.getLong("lastUpdateDT", 0);
 		
-		Date lastUpdDate = new Date(lastUpdate);
+		Date lastUpdDate;
 		
-		String city_ID = sp.getString("city_id", GetForecastTask.KIEV_ID);
+		lastUpdDate = new Date(lastUpdate);
+			
+
 		
+		
+				
 		int numberCityID = Integer.parseInt(city_ID);
 			
 		Calendar calendarToday = Calendar.getInstance();
 		
-		calendarToday.set(Calendar.HOUR_OF_DAY, 0);
-		calendarToday.set(Calendar.MINUTE, 0);
-		calendarToday.set(Calendar.SECOND, 0);
-		calendarToday.set(Calendar.MILLISECOND, 0);
+//		calendarToday.set(Calendar.HOUR_OF_DAY, 0);
+//		calendarToday.set(Calendar.MINUTE, 0);
+//		calendarToday.set(Calendar.SECOND, 0);
+//		calendarToday.set(Calendar.MILLISECOND, 0);
 		
 		tempWDBAdapter.open();		
 			
-		DailyForecast dailyForecast = tempWDBAdapter.getDailyForecast(numberCityID, calendarToday.getTimeInMillis());
+		HourlyForecast hourlyForecast = tempWDBAdapter.getHourlyForecast(numberCityID, calendarToday.getTimeInMillis());
 		
-		Log.d("DF", "" + dailyForecast.getDailyWeather().length);
-	
+			
 		tempWDBAdapter.close();
 		
-		if (dailyForecast != null) {
+		if (hourlyForecast != null) {
 			
-			dailyAdapter = new DailyForecastAdapter(this, dailyForecast.getDailyWeather() );
+			hourlyAdapter = new HourlyForecastAdapter(this, hourlyForecast.getHourlyWeather() );
 			
-			
-			tvCityCountry.setText(dailyForecast.getCity().getCityName() + ", " +
-					dailyForecast.getCity().getCountry());
-			
-			lvMain.setAdapter(dailyAdapter);
+			tvCityCountry.setText(hourlyForecast.getCity().getCityName() + ", " +
+					hourlyForecast.getCity().getCountry());
 			
 			if (lastUpdate == 0) {
 				
@@ -94,8 +93,11 @@ public class DailyForecastActivity extends Activity {
 				
 				tvLastUpdate.setText("Last updated: " + ft_date_time.format(lastUpdDate));
 				
-			}			
+			}
 			
+			
+						
+			lvMain.setAdapter(hourlyAdapter);
 			
 		}
 		
@@ -105,15 +107,17 @@ public class DailyForecastActivity extends Activity {
 	}
 	
 	
+	private View createHeader(String text) {
+	      View v = getLayoutInflater().inflate(R.layout.header, null);
+	      ( (TextView) v.findViewById(R.id.tvHeaderText) ).setText(text);
+	      return v;
+	}
 	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu){
-		
-		MenuItem mi = menu.add(0,0,0,getResources().getString(R.string.preferences));
-				
-		mi.setIntent(new Intent(this, PrefActivity.class));
-		
-		return super.onCreateOptionsMenu(menu);
+	
+	private View createFooter(String text) {
+	      View v = getLayoutInflater().inflate(R.layout.footer, null);
+	      ( (TextView) v.findViewById(R.id.tvFooterText) ).setText(text);
+	      return v;
 	}
 
 }

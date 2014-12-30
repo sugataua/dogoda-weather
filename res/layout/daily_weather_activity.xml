@@ -2,13 +2,42 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@color/background_dark_grey"
     android:orientation="vertical" >
+    
+    <TextView
+        android:id="@+id/tvHeaderText"        
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="3dp"
+        android:layout_weight="13"         
+        android:textSize="@dimen/normal_font_size"
+        android:textColor="@color/white"                
+        android:text="St Petersburg, Russia"
+         />    
     
     <ListView
         android:id="@+id/lvMain"
+        android:layout_weight="2"
         android:layout_width="fill_parent"        
-        android:layout_height="fill_parent" >
+        android:layout_height="fill_parent"
+        >
         
     </ListView>
+    
+	<RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="13"  >
+    <TextView 
+        android:id="@+id/tvFooterText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"        
+               
+        android:gravity="center"
+        android:textColor="#eeeeee"
+        android:text="Last updated: 29.12.2014 00:12" />
+    
+    </RelativeLayout>
  
 </LinearLayout>

@@ -19,6 +19,8 @@
     <string name="units">Units</string>
     <string name="temperature">Temperature</string>
     <string name="tap_change_u">Tap to change units</string>
+    <string name="wind">Wind</string>
+    <string name="clouds">Clouds</string>
     
     
     

@@ -655,6 +655,51 @@ public class WeatherDBAdapter {
 		return 0;				
 	}
 	
+	public HourlyForecast getHourlyForecast(long _cityRowID, long _afterDTstamp) {
+		
+		HourlyForecast hfData = null;
+		WeatherConditions[] hfWeather;
+		
+		String selection = COLUMN_CITY_ID + "=" + _cityRowID + " and "
+				+ COLUMN_DT + ">=" + _afterDTstamp + " and "
+						+ COLUMN_SUNRISE + " is null ";
+		String orderBy = COLUMN_DT;
+		String[] columns = {KEY_ID};
+		
+		
+		Cursor c = db.query(TABLE_WEATHER_CONDITIONS, columns, selection, null, null, null, orderBy);
+		
+		if (c.moveToFirst()) {
+			int idColIndex = c.getColumnIndex(KEY_ID);
+			int rowCount = c.getCount();
+			long rowID;
+			int i = 0;
+			
+			hfWeather = new WeatherConditions[rowCount];
+			
+			do {
+				rowID = c.getLong(idColIndex);
+				hfWeather[i] = getWeatherConditions(rowID);
+				i++;
+				
+			} while(c.moveToNext());
+			
+			
+			City city = getCity(_cityRowID);
+			hfData = new HourlyForecast(city);	
+			
+			
+			hfData.setHourlyWeather(hfWeather);
+			
+			
+		}
+		
+		c.close();
+		
+			
+		return hfData;
+	}
+	
 	public DailyForecast getDailyForecast(long _cityRowID, long _afterDTstamp) {
 		DailyForecast dfData = null;
 		DailyWeatherConditions[] fwc;
@@ -674,20 +719,14 @@ public class WeatherDBAdapter {
 			int i = 0;
 			
 			fwc = new DailyWeatherConditions[rowCount];
-			
-//			for (int i = 0; i < rowCount; i++) {
-//				fwc[i] = getDailyWeatherConditions(wCondRowId);							
-//				
-//				if (c.moveToNext()) {
-//					wCondRowId = c.getLong(idColIndex);					
-//				}
-//				
-//			}			
+	
 			do {
 				wCondRowId = c.getLong(idColIndex);
 				fwc[i] = getDailyWeatherConditions(wCondRowId);								
 				i++;
 			} while (c.moveToNext());
+			
+			Log.d(LOG_TAG,"Cursor get:" + i);
 								
 			dfData = new DailyForecast();
 			
@@ -826,6 +865,89 @@ public class WeatherDBAdapter {
 		
 				
 		return weatherConditionsRowID;
+	}
+	
+	public WeatherConditions getWeatherConditions(long _rowID) {
+		
+		WeatherConditions wc = null;
+		
+		String selection = KEY_ID + "=" + _rowID;
+		
+		Cursor c = db.query(TABLE_WEATHER_CONDITIONS, null, selection, null, null, null, null);
+		
+		if (c.moveToFirst()) {
+			
+			int idColIndex = c.getColumnIndex(KEY_ID);			
+			int tempColIndex = c.getColumnIndex(COLUMN_TEMP);
+			int tempMinColIndex = c.getColumnIndex(COLUMN_TEMP_MIN);
+			int tempMaxColIndex = c.getColumnIndex(COLUMN_TEMP_MAX);
+			int pressureColIndex = c.getColumnIndex(COLUMN_PRESSURE);
+			int pressureSLColIndex = c.getColumnIndex(COLUMN_PRESSURE_SEA_LEVEL);
+			int pressureGLColIndex = c.getColumnIndex(COLUMN_PRESSURE_GRND_LEVEL);
+			int windSpeedColIndex = c.getColumnIndex(COLUMN_WIND_SPEED);
+			int windDegreeColIndex = c.getColumnIndex(COLUMN_WIND_DEGREE);
+			int windGustColIndex = c.getColumnIndex(COLUMN_WIND_GUST);
+			int humidityColIndex = c.getColumnIndex(COLUMN_HUMIDITY);
+			int cloudsColIndex = c.getColumnIndex(COLUMN_CLOUDS);
+			int sunriseColIndex = c.getColumnIndex(COLUMN_SUNRISE);
+			int sunsetColIndex = c.getColumnIndex(COLUMN_SUNSET);
+			int precColIndex = c.getColumnIndex(COLUMN_PRECIPITATION);
+			int precVolumeColIndex = c.getColumnIndex(COLUMN_PRECIPITATION_VOLUME);
+			int dtColIndex = c.getColumnIndex(COLUMN_DT);
+						
+			WeatherCodesArray wcodeArr;			
+			
+			wcodeArr = getHourlyWeatherCodesArray(c.getInt(idColIndex));
+			
+			wc = new WeatherConditions(wcodeArr);
+			
+			
+			wc.setTemp(c.getDouble(tempColIndex));
+			
+			if (! c.isNull(tempMinColIndex)) {
+				wc.setTempMin(c.getDouble(tempMinColIndex));					
+			}
+			
+			if (! c.isNull(tempMaxColIndex)) {
+				wc.setTempMax(c.getDouble(tempMaxColIndex));					
+			}
+			
+			
+			wc.setHumidity(c.getInt(humidityColIndex));
+			wc.setClouds(c.getInt(cloudsColIndex));
+			
+										
+			
+			wc.setPressure(c.getDouble(pressureColIndex));
+			if (! c.isNull(pressureSLColIndex)) {
+				wc.setPressureSeaLevel(c.getDouble(pressureSLColIndex));					
+			}
+			
+			if (! c.isNull(pressureGLColIndex)) {
+				wc.setPressureGrndLevel(c.getDouble(pressureGLColIndex));				
+			}
+			
+			
+			wc.setPrecipitation(c.getString(precColIndex));
+			wc.setPrecipitationVolume(c.getDouble(precVolumeColIndex));
+			
+			wc.setWindSpeed(c.getDouble(windSpeedColIndex));
+			wc.setWindDegree(c.getDouble(windDegreeColIndex));
+			if (! c.isNull(windGustColIndex)) {
+				wc.setWindGust(c.getDouble(windGustColIndex));					
+			}
+			
+		
+			wc.setDT(c.getLong(dtColIndex));
+			
+		}
+		
+		c.close();
+		
+		return wc;
+		
+		
+		
 	}
 	
 	public DailyWeatherConditions getDailyWeatherConditions(long _dwcRowID) {

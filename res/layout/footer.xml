@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/background_dark_grey"
+    android:orientation="vertical" >
+    
+        <RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+    <TextView 
+        android:id="@+id/tvFooterText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"        
+        android:layout_gravity="center_horizontal"         
+        android:gravity="center"
+        android:textColor="#eeeeee"
+        android:text="Last updated: 29.12.2014 00:12" />
+    
+    </RelativeLayout>
+    
+
+</LinearLayout>
