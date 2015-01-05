@@ -146,6 +146,10 @@ public class WeatherConditions {
 		return degreeConverterFromKelvin(degree,this.temp);
 	}
 	
+	public int getTempInt(Degree degree) {
+		return (int) Math.round(degreeConverterFromKelvin(degree,this.temp));
+	}
+	
 	public void setTemp(double _temp) {
 		this.temp = _temp;
 	}

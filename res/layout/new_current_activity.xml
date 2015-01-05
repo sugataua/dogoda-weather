@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"        
         android:textSize="@dimen/normal_font_size"
         android:textColor="@color/white"                
-        android:text="St Petersburg, Russia"
+        android:text="@string/empty"
          />
     
 
@@ -80,6 +80,7 @@
 	            android:layout_width="125dp"
 	            android:layout_height="125dp"
 	            android:layout_centerHorizontal="true"
+	            android:contentDescription="@string/empty"
 	            android:src="@drawable/overcast"            
 	            />
 	        
@@ -127,7 +128,7 @@
                 android:layout_width="wrap_content"
                 android:layout_margin="1dp"
                 android:textColor="#eeeeee"
-                android:text="Wind: 4 m/s, north-east." 
+                android:text="@string/empty" 
                 />
             
             <TextView
@@ -136,7 +137,7 @@
                 android:layout_width="wrap_content"
                 android:layout_margin="1dp"
                 android:textColor="#eeeeee"
-                android:text="Precipitation: snow, 10 mm." 
+                android:text="@string/empty" 
                 /> 
 	            
     </LinearLayout>
@@ -154,7 +155,7 @@
         android:layout_gravity="center_horizontal"         
         android:gravity="center"
         android:textColor="#eeeeee"
-        android:text="Last updated: 29.12.2014 00:12" />
+        android:text="@string/empty" />
     
     </RelativeLayout>
 
