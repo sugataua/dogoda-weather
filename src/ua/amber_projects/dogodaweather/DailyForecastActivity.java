@@ -1,17 +1,12 @@
 package ua.amber_projects.dogodaweather;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,7 +19,7 @@ public class DailyForecastActivity extends Activity {
 	TextView tvCityCountry;
 	TextView tvLastUpdate;
 	
-	final SimpleDateFormat ft_date_time = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState){
@@ -34,18 +29,11 @@ public class DailyForecastActivity extends Activity {
 		
 		sp = PreferenceManager.getDefaultSharedPreferences(this);
 		
-		tempWDBAdapter = new WeatherDBAdapter(this);
-		
+		tempWDBAdapter = new WeatherDBAdapter(this);		
 		
 		lvMain = (ListView) findViewById(R.id.lvMain);
 		tvCityCountry = (TextView) this.findViewById(R.id.tvHeaderText);
-		tvLastUpdate = (TextView) this.findViewById(R.id.tvFooterText);
-		
-		
-		
-		
-		
-		
+		tvLastUpdate = (TextView) this.findViewById(R.id.tvFooterText);		
 		
 	}
 	
@@ -90,30 +78,17 @@ public class DailyForecastActivity extends Activity {
 				
 			} else {
 				
-				tvLastUpdate.setText("Last updated: " + ft_date_time.format(lastUpdDate));
+				tvLastUpdate.setText("Last updated: " + MainTabActivity.ft_date_time.format(lastUpdDate));
 				
 			}
 			
-			lvMain.setAdapter(dailyAdapter);
+			lvMain.setAdapter(dailyAdapter);			
 			
-			
-		}
-		
-	
+		}		
 		
 		super.onResume();
-	}
+	}	
 	
-	
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu){
-		
-		MenuItem mi = menu.add(0,0,0,getResources().getString(R.string.preferences));
-				
-		mi.setIntent(new Intent(this, PrefActivity.class));
-		
-		return super.onCreateOptionsMenu(menu);
-	}
+
 
 }

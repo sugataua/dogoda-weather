@@ -26,147 +26,91 @@ import android.widget.Toast;
 
 public class CurrentWeatherActivity extends Activity {
 	
-	TextView tvTemp;
-	//TextView tvTempMinMax;
+	SharedPreferences sp;	
+	BroadcastReceiver br;
+	
+	TextView tvTemp;	
 	TextView tvCityCountry;
 	TextView tvHumidity;
 	TextView tvPressure;
 	TextView tvWeatherDescription;
 	ImageView ivWeatherCondition;
-	
-//	TextView tvTodayTempForecast;
-//	TextView tvTodayPrecForecast;
-//	ImageView ivTodayWeatherCondition;
-	
 	TextView tvClouds;
 	TextView tvWind;
 	TextView tvPrec;
-	
-//	TextView tvDataStatus;
-	
 	TextView tvUpdatedTime;
-//	
-//	TextView tvTomorrowTempForecast;
-//	TextView tvTomorrowPrecForecast;
-//	ImageView ivTomorrowWeatherCondition;
 	
-	final int REQUEST_CODE_CITY_CHANGE = 1;
-	
+	final int REQUEST_CODE_CITY_CHANGE = 1;	
 	public final static String PARAM_PINTENT = "pendingIntent";
-	public final static String PARAM_RESULT = "result";
+	public final static String PARAM_RESULT = "result";	
+	public final static int STATUS_UPDATED = 200;	
+	public final static String BROADCAST_ACTION = "ua.amber_projects.dogodaweather";	
 	
-	public final static int STATUS_UPDATED = 200;
-	
-	
-	public final static String BROADCAST_ACTION = "ua.amber_projects.dogodaweather";
-	
-	
-	String city_ID; // = GetForecastTask.KIEV_ID;
-	String city_Name;
-	
-	SharedPreferences sp;
-	
-	BroadcastReceiver br;
-	
-	
+	String city_ID;
+	String city_Name;	
 	
 	@Override
 	public void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		// Set the layout for this activity
-		setContentView(R.layout.new_current_activity);
+		setContentView(R.layout.new_current_activity);    			
 		
+		tvCityCountry = (TextView) findViewById(R.id.tvCityCountry);
 		
-    	tvTemp = (TextView) findViewById(R.id.tvTemp);
-    	tvCityCountry = (TextView) findViewById(R.id.tvCityCountry);
-    	
+    	tvTemp = (TextView) findViewById(R.id.tvTemp);    	
     	tvHumidity = (TextView) findViewById(R.id.tvHumidity);
     	tvPressure = (TextView) findViewById(R.id.tvPressure);
+    	
     	tvWeatherDescription = (TextView) findViewById(R.id.tvWeatherDescription);
     	ivWeatherCondition = (ImageView) findViewById(R.id.ivWeatherCondition);
-    	
+	
     	tvClouds = (TextView) findViewById(R.id.tvClouds);
     	tvWind = (TextView) findViewById(R.id.tvWind);
     	tvPrec = (TextView) findViewById(R.id.tvPrec);
-    	
-//    	tvDataStatus = (TextView) findViewById(R.id.tvDataStatus);
+
     	tvUpdatedTime = (TextView) findViewById(R.id.tvUpdatedTime);
-    	
-    	
-    	
-//    	tvTodayTempForecast = (TextView) findViewById(R.id.tvTodayTempForecast);
-//    	tvTodayPrecForecast = (TextView) findViewById(R.id.tvTodayPrecForecast);
-//    	
-//    	ivTodayWeatherCondition = (ImageView) findViewById (R.id.ivTodayWeatherCondition);
-//    	
-//    	tvTomorrowTempForecast = (TextView) findViewById(R.id.tvTonightTempForecast);
-//    	tvTomorrowPrecForecast = (TextView) findViewById(R.id.tvTonightPrecForecast);
-//    	ivTomorrowWeatherCondition = (ImageView) findViewById (R.id.ivTonightWeatherCondition);
-    	
-    	
-		
+
     	sp = PreferenceManager.getDefaultSharedPreferences(this);
-    	
     	    	
     	city_ID = sp.getString("city_id", GetForecastTask.KIEV_ID);
 		
-//    	if (UpdateWeatherService.isRunning) {
-//			stopService(new Intent(this, UpdateWeatherService.class));				
-//		}
-//		startService(new Intent(this, UpdateWeatherService.class));	
 		
-		
+    	// Weather update service starting
     	if ( !UpdateWeatherService.isRunning ) {
     		startService(new Intent(this, UpdateWeatherService.class));				
 		}
 			
     	
-    	   br = new BroadcastReceiver() {
-    		      // действия при получении сообщений
-    		   
-    		   	  @Override
-    		      public void onReceive(Context context, Intent intent) {
-    		   		  
-    		   		  Log.d("BroadcastReceiver", "Received");
-    		   		  String city_ID = sp.getString("city_id", GetForecastTask.KIEV_ID);
-    		   		  refreshWeatherOnScreen(city_ID);
-    		        
-//    		        int status = intent.getIntExtra("asasa", 0);
-//    		        //Log.d("BR", "onReceive: task = " + task + ", status = " + status);
-//    		        
-//   		        
-//    		        // Ловим сообщения об окончании задач
-//    		        if (status == STATUS_UPDATED) {
-//
-//    		          }
-    		        }
-    		      };
-    		   
-    	   
-    	    // создаем фильтр для BroadcastReceiver
-    	    IntentFilter intFilt = new IntentFilter(BROADCAST_ACTION);
-    	    // регистрируем (включаем) BroadcastReceiver
-    	    registerReceiver(br, intFilt);
-    	
+    	// Receiver to catch weather updates from UpdateService
+    	br = new BroadcastReceiver() {    		      
+    		@Override
+    		public void onReceive(Context context, Intent intent) {
+    			
+    			String city_ID = sp.getString("city_id", GetForecastTask.KIEV_ID);
+    			refreshWeatherOnScreen(city_ID);
 
-    	    
+    		}
+    	};
+    		   
+
+    	IntentFilter intFilt = new IntentFilter(BROADCAST_ACTION);
     	
-		
-		
+    	registerReceiver(br, intFilt);
+	
 	}
 	
 	@Override
 	protected void onResume() {
-		
-		
-		//stopService(new Intent(this, UpdateWeatherService.class));
-		
+				
+		// Getting city id from application preferences
 		String new_city_ID = sp.getString("city_id", GetForecastTask.KIEV_ID);
 		
+		// Checking for city id changes
 		if (! city_ID.equals(new_city_ID)) {			
 			city_ID = new_city_ID;
 			
+			// Restarting service for getting weather data for new city
 			if (UpdateWeatherService.isRunning) {
 				stopService(new Intent(this, UpdateWeatherService.class));				
 			}
@@ -175,32 +119,23 @@ public class CurrentWeatherActivity extends Activity {
 		
 		refreshWeatherOnScreen(city_ID);
 		
-		//new UpdateTask().execute();
-
-		super.onResume();	
-		
+		super.onResume();			
 	}
 	
 	
 	@Override
-	protected void onDestroy() {
-		//stopService(new Intent(this, UpdateWeatherService.class));		
+	protected void onDestroy() {						
 		super.onDestroy();
+		
 		unregisterReceiver(br);
-	}
+	}	
 	
 	
-	
-	
-	private void refreshWeatherOnScreen(String city_ID) {
+	private void refreshWeatherOnScreen(String city_ID) {	
+				
+		int numberCityID = Integer.parseInt(city_ID);		
 		
-		
-		int numberCityID = Integer.parseInt(city_ID);
-		WeatherDBAdapter tempWDBAdapter;
-		tempWDBAdapter = new WeatherDBAdapter(CurrentWeatherActivity.this);
-		
-		
-		tempWDBAdapter.open();
+		WeatherDBAdapter tempWDBAdapter = new WeatherDBAdapter(CurrentWeatherActivity.this);
 		
 		Calendar calendarNow = Calendar.getInstance();
 		Calendar calendarToday = Calendar.getInstance();
@@ -211,17 +146,15 @@ public class CurrentWeatherActivity extends Activity {
 		calendarToday.set(Calendar.MILLISECOND, 0);
 		
 		long currentTimeMillis = calendarNow.getTimeInMillis();
-		
-		//Log.d("Time", "now: " + currentTimeMillis);
 		long currentTimeMinus3H = currentTimeMillis - (1000 * 60 * 60 * 3);		 
-		//Log.d("Time", "3 hours before: " + currentTimeMinus3H);
-		//Log.d("Time", "This day: " + calendarToday.getTimeInMillis());
+
+		tempWDBAdapter.open();
 		
-				
 		CurrentWeatherConditions cWC = tempWDBAdapter.getLastCurrentWeather(numberCityID, currentTimeMinus3H);
 		HourlyForecast hF = tempWDBAdapter.getHourlyForecast(numberCityID, currentTimeMinus3H);
 		DailyForecast dF = tempWDBAdapter.getDailyForecast(numberCityID, calendarToday.getTimeInMillis());
 		
+		// It`s feature for debugging
 		//tempWDBAdapter.cleanAllTables();
 		
 		tempWDBAdapter.close();
@@ -230,8 +163,7 @@ public class CurrentWeatherActivity extends Activity {
 		
 		Date lastUpdDate = new Date(lastUpdate);
 		
-		SimpleDateFormat ft_date_time = new SimpleDateFormat("dd.MM.yyyy HH:mm");
-				
+		SimpleDateFormat ft_date_time = new SimpleDateFormat("dd.MM.yyyy HH:mm");				
 		
 		tvUpdatedTime.setText("Last updated: " + ft_date_time.format(lastUpdDate));
 		

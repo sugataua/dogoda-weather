@@ -1,11 +1,17 @@
 package ua.amber_projects.dogodaweather;
 
+import android.annotation.SuppressLint;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TabHost;
+import java.text.SimpleDateFormat;
 
 public class MainTabActivity extends TabActivity {
+	
+	@SuppressLint("SimpleDateFormat")
+	static final SimpleDateFormat ft_date_time = new SimpleDateFormat("dd.MM.yyyy HH:mm"); 	
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
