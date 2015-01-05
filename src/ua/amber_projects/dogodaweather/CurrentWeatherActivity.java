@@ -129,7 +129,7 @@ public class CurrentWeatherActivity extends Activity {
 		int numberCityID = Integer.parseInt(city_ID);			
 		
 		Calendar calendarNow = Calendar.getInstance();
-		// TODO: delete magic!
+		// TODO: change magic numbers!
 		long currentTimeMinus3H = calendarNow.getTimeInMillis() - (1000 * 60 * 60 * 3);
 		
 		WeatherDBAdapter tempWDBAdapter = new WeatherDBAdapter(CurrentWeatherActivity.this);
