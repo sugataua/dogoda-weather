@@ -26,8 +26,7 @@ public class HourlyForecastActivity extends Activity {
 	TextView tvCityCountry;
 	TextView tvLastUpdate;
 	final SimpleDateFormat ft_date_time = new SimpleDateFormat("dd.MM.yyyy HH:mm");
-//	View header;
-//	View footer;
+
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {		
@@ -65,10 +64,6 @@ public class HourlyForecastActivity extends Activity {
 			
 		Calendar calendarToday = Calendar.getInstance();
 		
-//		calendarToday.set(Calendar.HOUR_OF_DAY, 0);
-//		calendarToday.set(Calendar.MINUTE, 0);
-//		calendarToday.set(Calendar.SECOND, 0);
-//		calendarToday.set(Calendar.MILLISECOND, 0);
 		
 		tempWDBAdapter.open();		
 			

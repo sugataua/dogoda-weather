@@ -71,8 +71,6 @@ public class DailyForecastActivity extends Activity {
 			
 		DailyForecast dailyForecast = tempWDBAdapter.getDailyForecast(numberCityID, calendarToday.getTimeInMillis());
 		
-		Log.d("DF", "" + dailyForecast.getDailyWeather().length);
-	
 		tempWDBAdapter.close();
 		
 		if (dailyForecast != null) {
@@ -94,7 +92,9 @@ public class DailyForecastActivity extends Activity {
 				
 				tvLastUpdate.setText("Last updated: " + ft_date_time.format(lastUpdDate));
 				
-			}			
+			}
+			
+			lvMain.setAdapter(dailyAdapter);
 			
 			
 		}
